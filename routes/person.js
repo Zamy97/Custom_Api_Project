@@ -14,7 +14,12 @@ router.get('/person', function(req, res, next) {
 // Parans property on the request object
 //localhost:3000/person/Fariha
 router.get('/person/:name', (req, res, next) => {
+
     res.send(`you have requested a person name ${req.params.name}`)
+})
+
+router.get('/person/loading/loading-page', (req, res, next) => {
+    res.render('loading')
 })
 
 module.exports = router;
