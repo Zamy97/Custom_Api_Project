@@ -38,7 +38,38 @@ router.get('/customer', (req, res) => {
         .catch(err => {
             res.status(500).json(err)
         })
+})
 
+router.put('/customer', (req, res) => {
+    if(!req.query.email){
+        return res.status(400).send("Missing url parameter")
+    }
+    customerModel.findOneAndUpdate({
+        email: req.query.email,
+    }, req.body, {
+        new: true
+    })
+        .then(doc => {
+            res.json(doc)
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
+})
+
+router.delete('/customer', (req, res) => {
+    if(!req.query.email){
+        return res.status(400).send("Missing url parameter")
+    }
+    customerModel.findOneAndRemove({
+        email: req.query.email,
+    })
+        .then(doc => {
+            res.json(doc)
+        })
+        .catch(err => {
+            res.status(500).json(err)
+        })
 })
 
 module.exports = router
