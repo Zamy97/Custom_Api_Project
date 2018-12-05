@@ -4,3 +4,6 @@ const router = express.Router();
 
 // Create a new customer
 //POST localhost:3000/customer
+router.post('/customer', (req, res) => {
+    res.json()
+})
