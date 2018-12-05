@@ -7,11 +7,14 @@ const exphbs = require('express-handlebars');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const personRoute = require('./routes/person.js')
+const customerRoute = require('./routes/customer.js')
+const bodyParser = require('body-parser');
 
 const app = express();
 
+app.use(bodyParser.json())
 app.use((req, res, next) => {
-    console.log(`${new Date().toString()} => ${req.originalUrl} `);
+    console.log(`${new Date().toString()} => ${req.originalUrl} `, req.body);
     next()
 });
 
@@ -28,7 +31,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/', personRoute)
+app.use('/', personRoute);
+app.use('/', customerRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
